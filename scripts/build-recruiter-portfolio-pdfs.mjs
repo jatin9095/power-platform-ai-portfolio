@@ -15,7 +15,7 @@ const studies = [
   {
     slug: "01-ITSM-COPILOT-SUPPORT-AUTOMATION",
     title: "ITSM Copilot and Support Automation",
-    subtitle: "A practical service-desk workflow for intake, triage, case creation, approvals, escalation, and reporting.",
+    subtitle: "A practical service-desk workflow for intake, triage, case creation, approvals, escalation, and reporting using AI Builder, Azure AI Foundry, Azure Functions, Power Automate, and Power BI.",
     accent: "ITSM / Conversational AI / Power Platform",
     metrics: [["01", "Support intake hub"], ["L2/L3", "Escalation path"], ["SLA", "Priority-aware routing"], ["Power BI", "Operational reporting"]],
     problem: "Support requests arrived as free-text messages and manual forms. Agents had to interpret the issue, ask for missing information, decide priority, create a case, and hand it to the correct queue. This created inconsistent categorization and made it difficult to track response and resolution performance.",
@@ -27,13 +27,13 @@ const studies = [
       ["04 / SUPPORT HANDOFF", "If automation cannot resolve the request, the handoff packet includes the conversation summary, attempted steps, extracted entities, attachments, confidence score, and reason for escalation so L2/L3 support can continue without repeating discovery."],
       ["05 / REPORTING", "Resolution status, response time, topic performance, escalation reason, and feedback are captured for Power BI or Microsoft Fabric-style reporting and continuous improvement."],
     ],
-    evidence: ["Copilot Studio topics and fallback handling", "Power Automate routing, validation, approval, and notification patterns", "Dataverse-style case and conversation-event model", "Adaptive Card for queue review and action", "Power BI / Fabric reporting fields", "Test scenarios and deployment runbook"],
-    stack: ["Copilot Studio", "Power Automate", "Power Apps", "Dataverse", "Azure AI", "Azure OpenAI", "Adaptive Cards", "Power BI", "Microsoft Fabric", "REST APIs", "JSON", "Git / Agile"]
+    evidence: ["Copilot Studio topics and fallback handling", "Power Automate routing, validation, approval, and notification patterns", "AI Builder and Azure AI Foundry patterns for classification, grounding, and structured inputs", "Azure Functions for custom processing and API integration", "Dataverse-style case and conversation-event model", "Adaptive Card for queue review and action", "Power BI / Fabric and App Insights telemetry fields", "Test scenarios, CI/CD handover, and deployment runbook"],
+    stack: ["Copilot Studio", "Power Automate", "Power Apps", "Dataverse", "AI Builder", "Azure AI Foundry", "Azure OpenAI", "Azure Functions", "Adaptive Cards", "Power BI", "Microsoft Fabric", "App Insights", "REST APIs", "JSON", "C# / .NET", "JavaScript / TypeScript", "Git / CI/CD", "Agile / Scrum"]
   },
   {
     slug: "02-FINANCE-REMCARD-RECONCILIATION",
     title: "Finance REM-Card Capture and Reconciliation",
-    subtitle: "A portfolio-safe reconstruction of a casino finance operation where handwritten physical documents were converted into structured, auditable data.",
+    subtitle: "A portfolio-safe reconstruction of a casino finance operation where handwritten physical documents were converted into structured, auditable data using AI Builder, Azure AI Foundry, Azure Functions, Power Automate, and Power BI.",
     accent: "Finance Operations / Document Intelligence / Reconciliation",
     metrics: [["Physical", "Handwritten REM cards"], ["Structured", "Tabular finance data"], ["Rule-based", "Variance checks"], ["Audit-ready", "Reconciliation output"]],
     problem: "Finance operations depended on handwritten REM cards and related operational records. Important values were written on paper and needed to be captured into a consistent table before reports could be reconciled. The challenge was not only reading the document; it was preserving the relationship between card, account, balances, payments, vouchers, VAT, and gaming adjustments.",
@@ -45,13 +45,13 @@ const studies = [
       ["04 / RECONCILIATION", "Operational totals and financial movements were compared across source records and reports. The reconciliation logic covered vouchers in, vouchers out, VAT in, VAT out, free bets, match play logs, cash movements, chip movements, and balance differences."],
       ["05 / EXCEPTION REPORTING", "Variances were isolated instead of being hidden inside totals. Exceptions could then be reviewed by finance operations with the original document reference, expected amount, captured amount, variance, and review status."],
     ],
-    evidence: ["Handwritten physical-document processing", "REM-card and account-level field capture", "Cash, chip, voucher, VAT, free-bet, and match-play tracking", "Reconciliation and variance identification", "Structured finance tables for downstream reporting", "Portfolio-safe design with domain and company details anonymized"],
-    stack: ["OCR / document capture", "Python", "Power Automate", "Excel", "Power Query", "SQL", "Dataverse", "Power BI", "Validation rules", "Variance reporting", "Audit trail"]
+    evidence: ["Handwritten physical-document processing", "AI Builder document/OCR extraction with Azure AI Foundry review and enrichment patterns", "Azure Functions for custom parsing, normalization, and integration", "REM-card and account-level field capture", "Cash, chip, voucher, VAT, free-bet, and match-play tracking", "Reconciliation and variance identification", "Structured finance tables for downstream reporting", "Portfolio-safe design with domain and company details anonymized"],
+    stack: ["OCR / document capture", "AI Builder", "Azure AI Foundry", "Azure Functions", "Python", "Power Automate", "Excel", "Power Query", "SQL", "Dataverse", "Power BI", "App Insights", "Validation rules", "Variance reporting", "Audit trail", "REST APIs", "Git / CI/CD"]
   },
   {
     slug: "03-FINANCE-DOCUMENT-AUTOMATION",
     title: "Finance Document Extraction and Reporting",
-    subtitle: "A reusable automation pattern for invoices, transaction documents, reconciliation support, and finance reporting.",
+    subtitle: "A reusable automation pattern for invoices, transaction documents, reconciliation support, and finance reporting using AI Builder, Azure AI Foundry, Azure Functions, Power Automate, and Power BI.",
     accent: "Finance Automation / OCR / Reporting",
     metrics: [["OCR", "Document extraction"], ["Reusable", "Rule-based parsing"], ["Integrated", "Excel / SQL / APIs"], ["Actionable", "Variance reporting"]],
     problem: "Finance teams often receive semi-structured documents with different layouts and inconsistent labels. Manual copying slows down processing and makes it difficult to compare reported totals with source documents. The solution pattern separates extraction, normalization, business rules, reconciliation, and reporting so each stage can be tested and improved independently.",
@@ -63,8 +63,8 @@ const studies = [
       ["04 / RECONCILIATION", "The normalized records are compared against source reports or operational data. Variances are calculated at the appropriate level, then categorized as missing document, amount mismatch, date mismatch, duplicate, or review required."],
       ["05 / DELIVERY", "Validated records are written to Excel, SQL, Dataverse, or a reporting layer. Power BI-style dashboards can show processed volume, exceptions, aging, variance categories, and operational trends."],
     ],
-    evidence: ["OCR and document-processing workflow design", "Python parsing and validation logic", "Power Automate integration and notifications", "Excel / Power Query / SQL data preparation", "Power BI reporting for exceptions and trends", "Reusable architecture for multiple document layouts"],
-    stack: ["Python", "OCR", "AI Builder", "Power Automate", "Excel", "Power Query", "SQL", "Power BI", "REST APIs", "Dataverse", "Azure", "Git"]
+    evidence: ["OCR and document-processing workflow design", "AI Builder extraction with Azure AI Foundry enrichment, grounding, and confidence-aware review", "Azure Functions for custom parsing, validation, and API integration", "Python parsing and validation logic", "Power Automate integration and notifications", "Excel / Power Query / SQL data preparation", "Power BI and App Insights reporting for exceptions, trends, and runtime telemetry", "Reusable architecture for multiple document layouts"],
+    stack: ["Python", "OCR", "AI Builder", "Azure AI Foundry", "Azure Functions", "Power Automate", "Excel", "Power Query", "SQL", "Power BI", "App Insights", "REST APIs", "Dataverse", "Azure", "C# / .NET", "JavaScript / TypeScript", "Git / CI/CD"]
   }
 ];
 

@@ -19,10 +19,13 @@ The projects are written as implementation case studies rather than client sourc
 - Microsoft Copilot Studio agents
 - Conversational AI and chatbot workflows
 - Azure AI Foundry and Azure OpenAI patterns
+- AI Builder document extraction and confidence-aware review
+- Azure Functions for custom parsing, transformation, and API integration
 - CLU-style intent routing and response grounding
 - Power Apps and Power Automate automation
 - Dataverse, SharePoint, SQL, and API integration
 - Power BI, Microsoft Fabric-style reporting, and telemetry
+- Application Insights, CI/CD, C#/.NET, JavaScript/TypeScript, and Adaptive Cards
 - L2/L3 support, troubleshooting, release handover, and adoption
 
 ## Case Studies
