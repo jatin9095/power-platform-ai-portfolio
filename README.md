@@ -1,4 +1,4 @@
-# Jatin Arya - AI Agents and Power Platform Portfolio
+# Jatin Arya - ITSM, Finance Automation, AI Agents and Power Platform Portfolio
 
 ## Recruiter Start Here
 
@@ -44,3 +44,4 @@ PDF summaries are available in [`pdf-case-studies`](pdf-case-studies/).
 ## Note
 
 All content is sanitized and uses sample data. No proprietary client code, credentials, production datasets, or confidential business records are included.
+
