@@ -11,9 +11,12 @@ const css = `
 @page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:#17202a;font-size:10pt}.page{width:210mm;min-height:297mm;padding:15mm 16mm 14mm;position:relative;page-break-after:always;overflow:hidden}.page:last-child{page-break-after:auto}:root{--navy:#12384a;--blue:#12637a;--teal:#1a9aaa;--ink:#17202a;--muted:#667085;--line:#d8e1e8;--pale:#f4f8fa;--green:#177c68;--orange:#b86c18}.topline{display:flex;justify-content:space-between;border-bottom:4px solid var(--blue);padding-bottom:10px;margin-bottom:15px}.eyebrow{text-transform:uppercase;letter-spacing:1.4px;font-size:8px;font-weight:700;color:var(--teal)}h1{font-size:30px;line-height:1.05;color:var(--navy);margin:10px 0 7px}h2{font-size:21px;color:var(--navy);margin:5px 0 0}h3{font-size:14px;color:var(--navy);margin:0 0 7px}h4{font-size:11px;color:var(--navy);margin:0 0 5px}p{line-height:1.45;margin:0}.lead{font-size:11px;line-height:1.55;color:#344054}.badge{background:#e6f3f5;color:var(--blue);padding:6px 9px;border-radius:5px;font-size:8px;font-weight:700;text-transform:uppercase;height:max-content}.callout{border-left:4px solid var(--teal);background:#eef8f9;padding:11px 12px;margin:13px 0;line-height:1.45}.two{display:grid;grid-template-columns:1.05fr .95fr;gap:13px}.panel{border:1px solid var(--line);border-radius:7px;padding:12px;background:#fff}.soft{background:var(--pale)}.list{margin:7px 0 0;padding-left:17px}.list li{margin-bottom:5px;line-height:1.38}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:14px 0 17px}.step{border:1px solid #bfd2db;background:#f7fbfc;border-radius:6px;padding:9px 7px;min-height:34mm}.num{width:19px;height:19px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:9px;font-weight:700;margin-bottom:7px}.step strong{display:block;font-size:9px;color:var(--navy);margin-bottom:4px}.step p{font-size:8px;color:#475467}.stage{display:grid;grid-template-columns:29mm 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line)}.stage:first-child{border-top:0}.stage-label{text-transform:uppercase;letter-spacing:.5px;font-size:8px;font-weight:700;color:var(--blue)}.stage p{font-size:9.2px}.outcome{font-size:8.5px;color:var(--green);font-weight:700;margin-top:4px}.code{background:#172b36;color:#d7f4f2;border-radius:6px;padding:10px;font-family:Consolas,monospace;font-size:7.5px;line-height:1.45;white-space:pre-wrap}.matrix{width:100%;border-collapse:collapse;font-size:8.5px}.matrix th{text-align:left;color:#fff;background:var(--navy);padding:6px}.matrix td{border-bottom:1px solid var(--line);padding:6px;vertical-align:top;line-height:1.3}.matrix tr:nth-child(even) td{background:#f7fafb}.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:13px 0}.metric{border-top:3px solid var(--teal);background:var(--pale);padding:8px}.metric strong{display:block;font-size:18px;color:var(--navy)}.metric span{font-size:8px;color:var(--muted)}.chips{display:flex;flex-wrap:wrap;gap:5px}.chip{border:1px solid #b9d2d9;background:#f6fbfc;color:var(--navy);border-radius:4px;padding:4px 6px;font-size:8px;font-weight:600}.footer{position:absolute;left:16mm;right:16mm;bottom:7mm;border-top:1px solid var(--line);padding-top:5px;font-size:7.5px;color:var(--muted);display:flex;justify-content:space-between}.hero{background:linear-gradient(135deg,var(--navy),#1c6477);color:#fff;border-radius:0 0 12px 12px;padding:19mm 17mm 16mm;margin:-15mm -16mm 15mm}.hero .eyebrow{color:#a8e3e8}.hero h1{color:#fff;max-width:145mm}.hero p{color:#e1eef2;max-width:158mm;font-size:11px}.hero .tag{display:inline-block;margin-top:12px;border:1px solid rgba(255,255,255,.5);border-radius:5px;padding:6px 8px;font-size:8px;font-weight:700}.step-list{counter-reset:item}.step-list .panel{margin-bottom:9px;display:grid;grid-template-columns:25mm 1fr;gap:10px}.step-list .stage-label{padding-top:2px}.small{font-size:8.5px;color:var(--muted)}
 `;
 
+const baseCss = css;
+
 const studies = [
   {
     slug: "01-ITSM-COPILOT-SUPPORT-AUTOMATION",
+    ui: "itsm",
     title: "ITSM Copilot and Support Automation",
     subtitle: "A practical service-desk workflow for intake, triage, case creation, approvals, escalation, and reporting using AI Builder, Azure AI Foundry, Azure Functions, Power Automate, and Power BI.",
     accent: "ITSM / Conversational AI / Power Platform",
@@ -32,6 +35,7 @@ const studies = [
   },
   {
     slug: "02-FINANCE-REMCARD-RECONCILIATION",
+    ui: "remcard",
     title: "Finance REM-Card Capture and Reconciliation",
     subtitle: "A portfolio-safe reconstruction of a casino finance operation where handwritten physical documents were converted into structured, auditable data using AI Builder, Azure AI Foundry, Azure Functions, Power Automate, and Power BI.",
     accent: "Finance Operations / Document Intelligence / Reconciliation",
@@ -50,6 +54,7 @@ const studies = [
   },
   {
     slug: "03-FINANCE-DOCUMENT-AUTOMATION",
+    ui: "finance",
     title: "Finance Document Extraction and Reporting",
     subtitle: "A reusable automation pattern for invoices, transaction documents, reconciliation support, and finance reporting using AI Builder, Azure AI Foundry, Azure Functions, Power Automate, and Power BI.",
     accent: "Finance Automation / OCR / Reporting",
@@ -68,7 +73,14 @@ const studies = [
   }
 ];
 
+const themes = {
+  itsm: `:root{--navy:#12384a;--blue:#12637a;--teal:#1a9aaa;--line:#c9dfe5;--pale:#f0f8fa}.hero{background:linear-gradient(135deg,#102f40,#12637a);border-radius:0 0 18px 0}.panel{border-radius:3px;box-shadow:0 3px 12px rgba(18,56,74,.07)}.step{border-left:4px solid var(--teal);border-radius:3px;background:#f3fafb}.metric{border-top-color:var(--teal);background:#edf8f9}.callout{background:#eaf7f8}.matrix th{background:#12384a}`,
+  remcard: `:root{--navy:#23483f;--blue:#286b5b;--teal:#c38a38;--line:#ded4c3;--pale:#f8f3e9;--green:#286b5b}.hero{background:linear-gradient(135deg,#23483f,#7d6038);border-radius:0 0 24px 24px}.panel{border-radius:2px;border-color:#d8cbb6}.soft{background:#fbf7ee}.step{border:1px dashed #c5aa78;border-top:4px solid var(--teal);border-radius:2px;background:#fcfaf5}.metric{border-top-color:var(--teal);background:#fbf5e8}.callout{background:#fbf5e8;border-left-color:var(--teal)}.matrix th{background:#23483f}.chip{border-color:#d9c49c;background:#fffaf0}`,
+  finance: `:root{--navy:#2e3655;--blue:#5865a8;--teal:#d06b35;--line:#d9d6d0;--pale:#f5f3f0;--green:#2b7a6e}.hero{background:linear-gradient(135deg,#2e3655,#705a83);border-radius:20px 0 20px 0}.panel{border-radius:12px;border-color:#d8d4ce}.step{border:0;border-top:4px solid var(--teal);border-radius:10px;background:#f7f5f2}.metric{border-top-color:var(--teal);background:#f5f3f0}.callout{background:#f5f0eb;border-left-color:var(--teal)}.matrix th{background:#2e3655}.chip{border-color:#d9c8bd;background:#fff8f4}`
+};
+
 function studyHtml(study, number) {
+  const css = baseCss + themes[study.ui];
   let footerIndex = 0;
   number = { toString: () => String(++footerIndex) };
   const metricHtml = study.metrics.map(([a,b]) => `<div class="metric"><strong>${a}</strong><span>${b}</span></div>`).join("");
