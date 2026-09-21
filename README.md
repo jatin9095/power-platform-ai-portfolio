@@ -1,5 +1,15 @@
 # Jatin Arya - AI Agents and Power Platform Portfolio
 
+## Recruiter Start Here
+
+Open [`00-START-HERE/portfolio-index.pdf`](00-START-HERE/portfolio-index.pdf) first. The portfolio is organized into a quick-reading PDF layer and a deeper implementation-artifacts layer:
+
+- [`00-START-HERE`](00-START-HERE/) - one-page navigation index for HR and recruiters.
+- [`01-PDF-CASE-STUDIES`](01-PDF-CASE-STUDIES/) - detailed PDF case studies explaining the actual business workflows.
+- [`02-IMPLEMENTATION-ARTIFACTS`](02-IMPLEMENTATION-ARTIFACTS/) - sanitized workflow definitions, sample payloads, data models, tests, and runbooks.
+
+The detailed case studies cover ITSM Copilot support automation, handwritten finance REM-card capture and reconciliation, and finance document extraction and reporting.
+
 This repository contains redacted portfolio case studies based on enterprise automation, conversational AI, Copilot Studio, Power Platform, Azure AI, and reporting work.
 
 The projects are written as implementation case studies rather than client source-code dumps. They avoid proprietary data while showing architecture, responsibilities, integrations, sample payloads, and delivery approach.
