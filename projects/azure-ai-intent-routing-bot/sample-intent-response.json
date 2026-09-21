@@ -1,0 +1,18 @@
+{
+  "messageId": "msg-1001",
+  "normalizedText": "I need access to the reporting dashboard",
+  "classification": {
+    "topIntent": "request_access",
+    "confidence": 0.94,
+    "secondaryIntent": "reporting_support"
+  },
+  "routingDecision": {
+    "dialog": "AccessRequestDialog",
+    "requiresHumanHandoff": false,
+    "requiresApproval": true
+  },
+  "state": {
+    "currentStep": "collect_business_justification",
+    "missingFields": ["managerEmail", "businessJustification"]
+  }
+}

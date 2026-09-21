@@ -1,0 +1,11 @@
+{
+  "sourceDocument": "sample-rem-card-001",
+  "remCardNumber": "REM-0001",
+  "accountNumber": "ACC-10001",
+  "cardBalance": 1250.75,
+  "cashIssued": 500.00,
+  "chipPayments": 300.00,
+  "cashPayments": 200.00,
+  "variance": 0.00,
+  "status": "validated"
+}

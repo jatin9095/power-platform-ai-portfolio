@@ -1,0 +1,18 @@
+{
+  "conversationId": "sample-conversation-001",
+  "user": {
+    "displayName": "Sample User",
+    "department": "Operations"
+  },
+  "intent": "access_request",
+  "confidence": 0.91,
+  "entities": {
+    "system": "CRM",
+    "accessLevel": "read_write",
+    "businessJustification": "Monthly reporting and customer follow-up"
+  },
+  "handoff": {
+    "requiresApproval": true,
+    "targetQueue": "IT Service Desk"
+  }
+}
