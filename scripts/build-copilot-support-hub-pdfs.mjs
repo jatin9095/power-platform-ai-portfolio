@@ -4,86 +4,39 @@ import { pathToFileURL } from "node:url";
 import puppeteer from "puppeteer";
 
 const root = path.resolve("github-portfolio");
-const projectDir = path.join(root, "projects", "copilot-support-workflow-hub");
 const outDir = path.join(root, "pdf-case-studies");
 
-const study = {
-  title: "Copilot Support Workflow Hub",
-  subtitle: "Sanitized Copilot Studio and Power Automate case study for enterprise support automation",
-  sections: [
-    ["Problem", "Employee support requests were spread across chat, email, and manual forms. The process needed faster classification, structured case capture, guided follow-up, and reliable handoff to support teams."],
-    ["Approach", "Designed a Copilot Studio agent with topic routing, AI-assisted intent classification, Power Automate workflows, Dataverse-style case records, Adaptive Card notifications, and feedback telemetry."],
-    ["Workflow Design", "Created sample workflows for intent routing, case creation, human handoff, and feedback logging. Each workflow uses structured JSON payloads so the design can be reviewed like a real implementation without exposing production assets."],
-    ["UI Preview", "Prepared a dummy operations dashboard for routed intents, open cases, handoff queue, confidence score, and recent conversation context."],
-    ["My Contribution", "Conversation design, workflow architecture, payload mapping, Adaptive Card structure, L2/L3 escalation logic, telemetry fields, test scenarios, and deployment runbook."],
-    ["Skills", "Copilot Studio, Power Automate, Dataverse, Power Apps, Adaptive Cards, Azure OpenAI, Azure AI intent routing concepts, REST APIs, JSON, Power BI, App Insights, Agile/Scrum."]
-  ]
-};
+const html = `<!doctype html><html><head><meta charset="utf-8"><style>
+@page{size:A4;margin:0} :root{--navy:#12384a;--blue:#12637a;--teal:#1a9aaa;--ink:#17202a;--muted:#657487;--line:#d8e1e8;--pale:#f4f8fa;--green:#177c68}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);font-size:10.5pt}.page{width:210mm;min-height:297mm;padding:16mm 17mm 14mm;position:relative;page-break-after:always;overflow:hidden}.page:last-child{page-break-after:auto}
+.cover{background:linear-gradient(135deg,var(--navy) 0 35%,#f8fbfc 35%);color:#fff}.eyebrow{text-transform:uppercase;letter-spacing:1.5px;font-size:9px;font-weight:700;color:var(--teal)}.cover .eyebrow{color:#a8e3e8}h1{margin:12px 0 6px;font-size:31px;line-height:1.07;color:var(--navy)}.cover h1{color:#fff;max-width:150mm}.sub{margin:0;line-height:1.45;color:var(--muted);font-size:12px;max-width:150mm}.cover .sub{color:#e1eef2}.hero{margin-top:47mm;max-width:145mm}.tag{display:inline-block;margin-top:13px;padding:7px 10px;border:1px solid rgba(255,255,255,.45);border-radius:5px;font-size:9px;font-weight:700}.cover-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30mm}.cover-card{padding:14px;background:rgba(255,255,255,.95);border-left:4px solid var(--teal);color:var(--ink);border-radius:6px;min-height:45mm}.cover-card strong{display:block;color:var(--navy);font-size:12px;margin-bottom:8px}.cover-card p{margin:0;line-height:1.45;font-size:10px}
+.footer{position:absolute;left:17mm;right:17mm;bottom:8mm;border-top:1px solid var(--line);padding-top:5px;font-size:8px;color:var(--muted);display:flex;justify-content:space-between}.cover .footer{border-color:rgba(255,255,255,.3);color:#c9d8de}.topline{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:4px solid var(--blue);padding-bottom:10px;margin-bottom:16px}.topline h2{margin:5px 0 0;color:var(--navy);font-size:22px}.badge{background:#e6f3f5;color:var(--blue);padding:6px 9px;border-radius:5px;font-size:8px;font-weight:700;text-transform:uppercase}h3{margin:0 0 8px;font-size:15px;color:var(--navy)}h4{margin:0 0 5px;font-size:11px;color:var(--navy)}p{margin:0;line-height:1.46}.lead{font-size:12px;line-height:1.55;color:#344054}.callout{border-left:4px solid var(--teal);background:#eef8f9;padding:12px 13px;margin:14px 0}.two{display:grid;grid-template-columns:1.08fr .92fr;gap:16px}.panel{border:1px solid var(--line);border-radius:7px;padding:13px;background:#fff}.panel.soft{background:var(--pale)}.list{margin:8px 0 0;padding-left:18px}.list li{margin:0 0 6px;line-height:1.38}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;align-items:stretch;margin:15px 0 18px}.step{position:relative;border:1px solid #bfd2db;background:#f7fbfc;border-radius:6px;padding:10px 8px 9px;min-height:38mm}.step:not(:last-child)::after{content:"";position:absolute;right:-8px;top:50%;width:9px;border-top:2px solid var(--teal);z-index:2}.num{width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:700;margin-bottom:8px}.step strong{display:block;color:var(--navy);font-size:10px;margin-bottom:5px}.step p{font-size:8.8px;color:#475467}.stage{display:grid;grid-template-columns:25mm 1fr;gap:12px;border-top:1px solid var(--line);padding:11px 0}.stage:first-child{border-top:0}.stage-label{text-transform:uppercase;color:var(--blue);font-size:8px;font-weight:700;letter-spacing:.7px}.stage p{font-size:10px}.stage .outcome{margin-top:5px;color:var(--green);font-size:9px;font-weight:700}.code{background:#172b36;color:#d7f4f2;border-radius:6px;padding:12px;font-family:Consolas,monospace;font-size:8px;line-height:1.5;white-space:pre-wrap}.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1px solid #b9d2d9;background:#f6fbfc;color:var(--navy);border-radius:4px;padding:5px 7px;font-size:9px;font-weight:600}.matrix{width:100%;border-collapse:collapse;font-size:9px}.matrix th{text-align:left;color:#fff;background:var(--navy);padding:7px}.matrix td{border-bottom:1px solid var(--line);padding:7px;vertical-align:top;line-height:1.35}.matrix tr:nth-child(even) td{background:#f7fafb}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.metric{border-top:3px solid var(--teal);background:var(--pale);padding:10px}.metric strong{display:block;font-size:20px;color:var(--navy)}.metric span{font-size:9px;color:var(--muted)}
+.screen{border:1px solid #cbd7df;border-radius:6px;overflow:hidden;background:#f4f7fa}.screen-head{padding:8px 11px;background:var(--navy);color:#fff;font-size:10px;font-weight:700}.screen-body{padding:10px}.screen-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.screen-metrics div{background:#fff;border:1px solid var(--line);padding:7px;border-radius:4px}.screen-metrics strong{display:block;color:var(--blue);font-size:13px}.screen-metrics span{font-size:7px;color:var(--muted)}.screen-table{margin-top:8px;background:#fff;border:1px solid var(--line);padding:6px;font-size:8px}.row{display:grid;grid-template-columns:1.2fr 1fr .7fr .8fr;padding:5px;border-bottom:1px solid #edf2f7}.row.head{color:var(--muted);font-weight:700}
+</style><style>.cover{background:linear-gradient(180deg,var(--navy) 0 57%,#f8fbfc 57%)}</style></head><body>
+<section class="page cover"><div class="hero"><div class="eyebrow">Portfolio case study / Microsoft ecosystem</div><h1>Copilot Support<br>Workflow Hub</h1><p class="sub">An end-to-end conversational support automation pattern that turns an employee request into a routed, traceable, and measurable service case.</p><span class="tag">Sanitized implementation portfolio</span></div><div class="cover-grid"><div class="cover-card"><strong>What it demonstrates</strong><p>Copilot Studio topics, Azure AI intent routing, Power Automate orchestration, Dataverse-style case management, Adaptive Cards, human handoff, and operational reporting.</p></div><div class="cover-card"><strong>Design objective</strong><p>Reduce repetitive support work while preserving validation, confidence checks, escalation paths, auditability, and feedback loops for L2/L3 teams.</p></div></div><div class="footer"><span>Jatin Arya | AI Agents and Power Platform</span><span>01 / 04</span></div></section>
+<section class="page"><div class="topline"><div><div class="eyebrow">01 / Solution story</div><h2>From conversation to resolution</h2></div><div class="badge">End-to-end workflow</div></div><p class="lead">Support requests often arrive as incomplete messages. This design gives Copilot enough structure to ask the right follow-up questions, route the request with a confidence score, create a consistent case record, and involve a person when automation should stop.</p><div class="callout"><strong>Business outcome:</strong> a repeatable support intake and handoff process with clearer ownership, better context for agents, and data that can be reported on instead of being lost in chat history.</div><h3>Workflow at a glance</h3><div class="flow"><div class="step"><div class="num">1</div><strong>Capture request</strong><p>Copilot receives the employee message and identifies the active topic.</p></div><div class="step"><div class="num">2</div><strong>Route intent</strong><p>AI-assisted classification returns intent, entities, priority, and confidence.</p></div><div class="step"><div class="num">3</div><strong>Orchestrate</strong><p>Power Automate validates fields and creates or updates the case record.</p></div><div class="step"><div class="num">4</div><strong>Resolve or hand off</strong><p>Copilot confirms the next action or sends a context-rich L2/L3 handoff.</p></div></div><div class="two"><div class="panel"><h3>Reference architecture</h3><div class="code">Employee / Teams / Web Chat
+          |
+          v
+Copilot Studio topics
+  | guided questions + topic routing
+          v
+Intent router (Azure AI / Azure OpenAI pattern)
+  | intent + confidence + entities
+          v
+Power Automate orchestration
+  | validate -> create/update -> notify
+          v
+Dataverse-style case + event tables
+  | status, owner, SLA, audit trail
+          v
+Adaptive Card -> Support queue -> Power BI telemetry</div></div><div class="panel soft"><h3>Core components</h3><ul class="list"><li><strong>Copilot Studio:</strong> topics, entities, fallback, guided dialogue.</li><li><strong>Power Automate:</strong> validation, branching, integration, notifications.</li><li><strong>Dataverse:</strong> cases, conversation events, handoff packets.</li><li><strong>Azure AI:</strong> intent classification and confidence-aware routing.</li><li><strong>Power BI / Fabric:</strong> volume, resolution, SLA, and escalation reporting.</li><li><strong>Adaptive Cards:</strong> actionable review and approval experience.</li></ul></div></div><div class="metric-row"><div class="metric"><strong>4</strong><span>Orchestrated workflow patterns</span></div><div class="metric"><strong>3</strong><span>Copilot topic examples</span></div><div class="metric"><strong>1</strong><span>Traceable case lifecycle</span></div></div><div class="footer"><span>Sanitized sample; no client names, credentials, production data, or proprietary endpoints.</span><span>02 / 04</span></div></section>
+<section class="page"><div class="topline"><div><div class="eyebrow">02 / Implementation detail</div><h2>How each request is processed</h2></div><div class="badge">Power Platform delivery</div></div><div class="stage"><div class="stage-label">Stage 1<br>Conversation</div><div><h4>Copilot topic and entity capture</h4><p>The agent recognizes access requests, case-status questions, knowledge lookups, and requests for a human agent. It asks for missing requester, system, urgency, and business-impact details before calling automation.</p><div class="outcome">Output: normalized request payload</div></div></div><div class="stage"><div class="stage-label">Stage 2<br>AI routing</div><div><h4>Intent, entities, and confidence</h4><p>The intent router returns a recommended route and confidence score. High-confidence requests continue automatically; low-confidence or sensitive requests are marked for human review.</p><div class="outcome">Output: intent + confidence + required entities</div></div></div><div class="stage"><div class="stage-label">Stage 3<br>Automation</div><div><h4>Power Automate validation and case creation</h4><p>Workflow branches validate required fields, apply priority rules, generate a case identifier, write the case and conversation event, and notify the assigned queue with an Adaptive Card.</p><div class="outcome">Output: case record + owner + SLA target</div></div></div><div class="stage"><div class="stage-label">Stage 4<br>Escalation</div><div><h4>Context-rich human handoff</h4><p>When the bot cannot safely resolve the request, the handoff packet includes the conversation summary, extracted entities, confidence score, attempted actions, attachments, and reason for escalation.</p><div class="outcome">Output: L2/L3-ready handoff packet</div></div></div><div class="stage"><div class="stage-label">Stage 5<br>Telemetry</div><div><h4>Feedback and operational reporting</h4><p>Resolution status, satisfaction rating, response time, topic performance, and escalation reason are captured for Power BI or Microsoft Fabric-style reporting and continuous improvement.</p><div class="outcome">Output: measurable service performance</div></div></div><h3 style="margin-top:14px">Example request payload</h3><div class="code">{ "requester": "employee@example.com", "message": "I need viewer access to the reporting workspace", "intent": "access_request", "confidence": 0.92, "priority": "medium", "required_entities": ["workspace", "access_level"], "route": "approval_flow" }</div><div class="footer"><span>Implementation emphasis: validation, traceability, confidence-aware automation, and operational handoff.</span><span>03 / 04</span></div></section>
+<section class="page"><div class="topline"><div><div class="eyebrow">03 / Recruiter view</div><h2>What I built and how it maps to the role</h2></div><div class="badge">Skills evidence</div></div><div class="two"><div class="panel"><h3>Operations dashboard preview</h3><div class="screen"><div class="screen-head">Copilot Support Operations</div><div class="screen-body"><div class="screen-metrics"><div><strong>128</strong><span>Routed today</span></div><div><strong>74%</strong><span>Automation rate</span></div><div><strong>11</strong><span>Handoff queue</span></div><div><strong>.86</strong><span>Avg confidence</span></div></div><div class="screen-table"><div class="row head"><span>Case</span><span>Intent</span><span>Status</span><span>Owner</span></div><div class="row"><span>SUP-10482</span><span>Access</span><span>Pending</span><span>Support Ops</span></div><div class="row"><span>SUP-10483</span><span>Incident</span><span>Assigned</span><span>L2 Support</span></div><div class="row"><span>SUP-10484</span><span>Knowledge</span><span>Resolved</span><span>Copilot</span></div></div></div></div></div><div class="panel soft"><h3>Portfolio evidence</h3><ul class="list"><li>Copilot topics for access requests, case status, and fallback/handoff.</li><li>Power Automate-style JSON for intent routing, case creation, human handoff, and telemetry.</li><li>Dataverse-style data model for cases, events, handoff packets, and feedback.</li><li>Adaptive Card definition for queue review and approval.</li><li>Sample test scenarios and deployment runbook.</li><li>Sanitized UI preview showing how support teams monitor the solution.</li></ul></div></div><h3 style="margin-top:18px">Role-aligned capability matrix</h3><table class="matrix"><thead><tr><th>Capability</th><th>Evidence in this project</th><th>Tools / keywords</th></tr></thead><tbody><tr><td>Conversational AI</td><td>Topic design, guided questions, fallback strategy, intent and entity capture.</td><td>Copilot Studio, chatbot design, dialog routing</td></tr><tr><td>Integration and orchestration</td><td>Structured payloads, validation, branching, case creation, queue notifications.</td><td>Power Automate, REST/API patterns, JSON</td></tr><tr><td>Azure AI and routing</td><td>Confidence-aware classification with a human-review threshold.</td><td>Azure OpenAI, CLU concepts, intent routing</td></tr><tr><td>Application and data</td><td>Case lifecycle, event trail, handoff packet, and operational data model.</td><td>Dataverse, Power Apps, SQL concepts</td></tr><tr><td>Reporting and support</td><td>Resolution, SLA, escalation, feedback, and topic-performance telemetry.</td><td>Power BI, Fabric-style reporting, L2/L3 support</td></tr></tbody></table><h3 style="margin-top:18px">Technology stack</h3><div class="chips"><span class="chip">Copilot Studio</span><span class="chip">Power Automate</span><span class="chip">Power Apps</span><span class="chip">Dataverse</span><span class="chip">Azure OpenAI</span><span class="chip">Azure AI</span><span class="chip">Bot Framework concepts</span><span class="chip">C# / .NET concepts</span><span class="chip">JavaScript / TypeScript</span><span class="chip">Adaptive Cards</span><span class="chip">Power BI</span><span class="chip">Microsoft Fabric</span><span class="chip">REST APIs</span><span class="chip">Git / Agile</span></div><div class="callout" style="margin-top:16px"><strong>Repository contents:</strong> workflow definitions, topic samples, adaptive card JSON, sample records, UI preview, test scenarios, deployment runbook, and this case-study PDF. Everything is sanitized for portfolio use.</div><div class="footer"><span>Jatin Arya | AI Agents and Power Platform Portfolio</span><span>04 / 04</span></div></section></body></html>`;
 
-function caseStudyHtml() {
-  return `<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <style>
-    @page { size: A4; margin: 15mm; }
-    body { font-family: "Segoe UI", Arial, sans-serif; color: #17202a; margin: 0; }
-    .top { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 5px solid #12637a; padding-bottom: 16px; margin-bottom: 18px; }
-    h1 { margin: 0; font-size: 29px; color: #12384a; letter-spacing: 0; }
-    .subtitle { margin: 7px 0 0; color: #425466; font-size: 13px; line-height: 1.4; max-width: 520px; }
-    .badge { padding: 6px 10px; border-radius: 5px; background: #e8f1f5; color: #12384a; font-size: 11px; font-weight: 700; white-space: nowrap; }
-    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
-    .metric { border: 1px solid #d0dbe3; border-radius: 8px; padding: 10px; background: #f8fbfd; }
-    .metric strong { display: block; color: #12384a; font-size: 15px; }
-    .metric span { color: #667085; font-size: 10px; }
-    section { margin: 0 0 15px; }
-    h2 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; color: #12384a; border-bottom: 1px solid #9cb7c4; padding-bottom: 5px; }
-    p { margin: 0; font-size: 11.5px; line-height: 1.55; }
-    footer { position: fixed; bottom: 8mm; left: 15mm; right: 15mm; color: #667085; font-size: 9px; border-top: 1px solid #d0d5dd; padding-top: 5px; }
-  </style>
-</head>
-<body>
-  <div class="top">
-    <div>
-      <h1>${study.title}</h1>
-      <p class="subtitle">${study.subtitle}</p>
-    </div>
-    <div class="badge">Redacted Portfolio Case Study</div>
-  </div>
-  <div class="summary">
-    <div class="metric"><strong>4</strong><span>Sample workflow definitions</span></div>
-    <div class="metric"><strong>3</strong><span>Copilot topic samples</span></div>
-    <div class="metric"><strong>0</strong><span>Client names or production data</span></div>
-  </div>
-  ${study.sections.map(([title, body]) => `<section><h2>${title}</h2><p>${body}</p></section>`).join("")}
-  <footer>Jatin Arya - Sanitized project summary. No client code, credentials, proprietary data, or production records included.</footer>
-</body>
-</html>`;
-}
+await fs.mkdir(outDir,{recursive:true});
+const htmlPath=path.join(outDir,"copilot-support-workflow-hub.html");
+const pdfPath=path.join(outDir,"copilot-support-workflow-hub.pdf");
+await fs.writeFile(htmlPath,html,"utf8");
+const browser=await puppeteer.launch({headless:"new",args:["--no-sandbox","--disable-setuid-sandbox"]});
+try{const page=await browser.newPage();await page.goto(pathToFileURL(htmlPath).href,{waitUntil:"networkidle0"});await page.pdf({path:pdfPath,format:"A4",printBackground:true,preferCSSPageSize:true});await page.close();console.log(pdfPath)}finally{await browser.close()}
 
-await fs.mkdir(outDir, { recursive: true });
-const caseStudyHtmlPath = path.join(outDir, "copilot-support-workflow-hub.html");
-const caseStudyPdfPath = path.join(outDir, "copilot-support-workflow-hub.pdf");
-const uiPdfPath = path.join(projectDir, "ui-preview.pdf");
-const uiHtmlPath = path.join(projectDir, "ui-wireframe.html");
-
-await fs.writeFile(caseStudyHtmlPath, caseStudyHtml(), "utf8");
-
-const browser = await puppeteer.launch({ headless: "new", args: ["--no-sandbox", "--disable-setuid-sandbox"] });
-try {
-  const casePage = await browser.newPage();
-  await casePage.goto(pathToFileURL(caseStudyHtmlPath).href, { waitUntil: "networkidle0" });
-  await casePage.pdf({ path: caseStudyPdfPath, format: "A4", printBackground: true });
-  await casePage.close();
-
-  const uiPage = await browser.newPage();
-  await uiPage.setViewport({ width: 1280, height: 900, deviceScaleFactor: 1 });
-  await uiPage.goto(pathToFileURL(uiHtmlPath).href, { waitUntil: "networkidle0" });
-  await uiPage.pdf({ path: uiPdfPath, format: "A4", landscape: true, printBackground: true });
-  await uiPage.close();
-
-  console.log(caseStudyPdfPath);
-  console.log(uiPdfPath);
-} finally {
-  await browser.close();
-}
