@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Support Workflow Hub - UI Preview</title>
+  <style>
+    :root {
+      --ink: #142433;
+      --muted: #667085;
+      --line: #d9e2ea;
+      --blue: #12637a;
+      --teal: #188f9f;
+      --bg: #f4f7fa;
+      --panel: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    aside {
+      background: #12384a;
+      color: #fff;
+      padding: 28px 22px;
+    }
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+    .nav {
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .nav span {
+      padding: 10px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.08);
+    }
+    main {
+      padding: 26px 30px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 5px;
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .button {
+      background: var(--blue);
+      color: #fff;
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .card, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(16,24,40,.06);
+    }
+    .card {
+      padding: 16px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-size: 26px;
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr .8fr;
+      gap: 16px;
+    }
+    .panel {
+      padding: 18px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--line);
+      padding: 9px 8px;
+    }
+    td {
+      border-bottom: 1px solid #edf2f7;
+      padding: 11px 8px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #e6f4f6;
+      color: #11606c;
+      font-weight: 600;
+      font-size: 11px;
+    }
+    .conversation {
+      display: grid;
+      gap: 10px;
+    }
+    .bubble {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .bot {
+      background: #f8fbfd;
+    }
+    .queue {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+    .queue-item {
+      border-left: 4px solid var(--teal);
+      background: #f8fbfd;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">Support Workflow Hub</div>
+      <div class="nav">
+        <span>Dashboard</span>
+        <span>Copilot Topics</span>
+        <span>Workflow Runs</span>
+        <span>Handoff Queue</span>
+        <span>Feedback Telemetry</span>
+      </div>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <h1>Copilot Support Operations</h1>
+          <p class="subtitle">Monitor routed intents, active cases, human handoffs, and feedback signals.</p>
+        </div>
+        <button class="button">Create Test Case</button>
+      </header>
+
+      <section class="metrics">
+        <div class="card"><div class="label">Routed Today</div><div class="value">128</div></div>
+        <div class="card"><div class="label">Automation Rate</div><div class="value">74%</div></div>
+        <div class="card"><div class="label">Handoff Queue</div><div class="value">11</div></div>
+        <div class="card"><div class="label">Avg Confidence</div><div class="value">0.86</div></div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>Recent Support Cases</h2>
+          <table>
+            <thead>
+              <tr><th>Case</th><th>Intent</th><th>Priority</th><th>Status</th><th>Owner</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>SUP-10482</td><td>Access Request</td><td>Medium</td><td><span class="pill">Pending Approval</span></td><td>Support Ops</td></tr>
+              <tr><td>SUP-10483</td><td>Case Creation</td><td>High</td><td><span class="pill">Assigned</span></td><td>L2 Support</td></tr>
+              <tr><td>SUP-10484</td><td>Knowledge Lookup</td><td>Low</td><td><span class="pill">Resolved by Bot</span></td><td>Copilot</td></tr>
+              <tr><td>SUP-10485</td><td>Human Handoff</td><td>Critical</td><td><span class="pill">In Review</span></td><td>L3 Support</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h2>Conversation Preview</h2>
+          <div class="conversation">
+            <div class="bubble">User: I need access to the reporting workspace for monthly review.</div>
+            <div class="bubble bot">Copilot: I can help with that. Which access level do you need?</div>
+            <div class="bubble">User: Viewer access is fine.</div>
+            <div class="bubble bot">Copilot: I created case SUP-10482 and sent it for approval.</div>
+          </div>
+          <div class="queue">
+            <div class="queue-item"><strong>Next action:</strong> Awaiting manager approval</div>
+            <div class="queue-item"><strong>Workflow:</strong> Create Support Case</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

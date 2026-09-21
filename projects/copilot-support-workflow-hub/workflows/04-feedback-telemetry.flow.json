@@ -1,0 +1,29 @@
+{
+  "name": "04-feedback-telemetry",
+  "displayName": "Capture Resolution Feedback",
+  "trigger": {
+    "type": "caseClosed",
+    "inputs": ["caseId", "rating", "resolutionStatus", "timeToResolveMinutes", "intent", "confidence"]
+  },
+  "actions": [
+    {
+      "id": "write_feedback_log",
+      "type": "dataverseCreateRow",
+      "table": "feedback_logs",
+      "fields": {
+        "case_id": "@triggerBody().caseId",
+        "rating": "@triggerBody().rating",
+        "resolution_status": "@triggerBody().resolutionStatus",
+        "time_to_resolve_minutes": "@triggerBody().timeToResolveMinutes",
+        "intent": "@triggerBody().intent",
+        "confidence": "@triggerBody().confidence"
+      }
+    },
+    {
+      "id": "publish_reporting_event",
+      "type": "telemetryEvent",
+      "target": "Power BI or App Insights dataset",
+      "eventName": "support_case_closed"
+    }
+  ]
+}

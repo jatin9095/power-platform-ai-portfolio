@@ -1,0 +1,41 @@
+{
+  "name": "01-intent-routing",
+  "displayName": "Classify Support Intent",
+  "trigger": {
+    "type": "copilotAction",
+    "inputs": ["messageText", "requesterEmail", "conversationId", "channel"]
+  },
+  "actions": [
+    {
+      "id": "normalize_text",
+      "type": "compose",
+      "description": "Trim whitespace, remove repeated punctuation, and prepare the user message for classification."
+    },
+    {
+      "id": "classify_intent",
+      "type": "aiClassifier",
+      "provider": "Azure OpenAI or Azure CLU pattern",
+      "inputs": {
+        "text": "@outputs('normalize_text')",
+        "candidateIntents": ["access_request", "incident_status", "how_to_question", "case_creation", "human_handoff"]
+      }
+    },
+    {
+      "id": "route_switch",
+      "type": "switch",
+      "expression": "@outputs('classify_intent').topIntent",
+      "cases": {
+        "access_request": "topic.access-request",
+        "incident_status": "topic.case-status",
+        "how_to_question": "topic.knowledge-lookup",
+        "case_creation": "workflow.create-support-case",
+        "human_handoff": "workflow.human-handoff"
+      }
+    }
+  ],
+  "outputs": {
+    "routeName": "@actions('route_switch').selectedRoute",
+    "confidence": "@outputs('classify_intent').confidence",
+    "requiredEntities": ["businessApplication", "priority", "shortDescription"]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "02-create-support-case",
+  "displayName": "Create Support Case",
+  "trigger": {
+    "type": "copilotAction",
+    "inputs": ["requesterEmail", "intent", "priority", "shortDescription", "conversationSummary"]
+  },
+  "actions": [
+    {
+      "id": "validate_required_fields",
+      "type": "condition",
+      "checks": ["requesterEmail is not empty", "shortDescription is not empty", "priority in Low/Medium/High/Critical"]
+    },
+    {
+      "id": "create_case_record",
+      "type": "dataverseCreateRow",
+      "table": "support_cases",
+      "fields": {
+        "case_id": "AUTO",
+        "requester_email": "@triggerBody().requesterEmail",
+        "intent": "@triggerBody().intent",
+        "priority": "@triggerBody().priority",
+        "status": "New",
+        "owner_group": "Support Operations"
+      }
+    },
+    {
+      "id": "post_adaptive_card",
+      "type": "teamsAdaptiveCard",
+      "template": "../adaptive-cards/support-case-card.json",
+      "recipient": "support-queue"
+    },
+    {
+      "id": "return_confirmation",
+      "type": "response",
+      "body": {
+        "message": "Your request has been logged and routed to the support queue.",
+        "caseId": "@outputs('create_case_record').case_id"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "topicName": "Case Status",
+  "triggerPhrases": [
+    "Check my ticket",
+    "What is the status of my request",
+    "Any update on my case"
+  ],
+  "slots": [
+    { "name": "caseId", "question": "Please share your case ID." }
+  ],
+  "actions": [
+    "lookup_case_status",
+    "summarize_latest_update",
+    "offer_human_handoff_if_delayed"
+  ]
+}

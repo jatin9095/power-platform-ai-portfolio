@@ -1,0 +1,32 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "New Support Case",
+      "weight": "Bolder",
+      "size": "Medium"
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        { "title": "Case ID", "value": "${caseId}" },
+        { "title": "Requester", "value": "${requesterEmail}" },
+        { "title": "Intent", "value": "${intent}" },
+        { "title": "Priority", "value": "${priority}" },
+        { "title": "Confidence", "value": "${confidence}" }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "${conversationSummary}",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    { "type": "Action.Submit", "title": "Accept Case", "data": { "action": "accept_case" } },
+    { "type": "Action.Submit", "title": "Request Details", "data": { "action": "request_details" } }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "topicName": "Access Request",
+  "triggerPhrases": [
+    "I need access",
+    "Please give me permission",
+    "I cannot open the application",
+    "Request access for a business app"
+  ],
+  "slots": [
+    { "name": "businessApplication", "question": "Which application or system do you need access to?" },
+    { "name": "accessLevel", "question": "What level of access do you need?" },
+    { "name": "businessJustification", "question": "Please share the business reason for this access." }
+  ],
+  "actions": [
+    "validate_required_slots",
+    "call_create_support_case_workflow",
+    "show_confirmation_message"
+  ]
+}

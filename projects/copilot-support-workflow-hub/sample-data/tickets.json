@@ -1,0 +1,18 @@
+[
+  {
+    "caseId": "SUP-10482",
+    "requesterEmail": "employee@example.com",
+    "intent": "access_request",
+    "priority": "Medium",
+    "status": "Pending Approval",
+    "ownerGroup": "Support Operations"
+  },
+  {
+    "caseId": "SUP-10483",
+    "requesterEmail": "analyst@example.com",
+    "intent": "case_creation",
+    "priority": "High",
+    "status": "Assigned",
+    "ownerGroup": "L2 Support"
+  }
+]

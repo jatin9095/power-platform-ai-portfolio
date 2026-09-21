@@ -22,6 +22,7 @@ The projects are written as implementation case studies rather than client sourc
 | [Copilot Studio Service Desk Agent](projects/copilot-studio-service-desk-agent/README.md) | Internal support agent for employee FAQs, ticket guidance, and workflow handoff. | Copilot Studio, Power Automate, Adaptive Cards, Dataverse, Teams |
 | [Azure AI Intent Routing Bot](projects/azure-ai-intent-routing-bot/README.md) | Hybrid bot pattern using intent classification, dialog routing, and fallback handling. | Azure OpenAI, CLU concepts, Bot Framework SDK v4, C#/.NET, JSON |
 | [Power Platform Finance Automation](projects/power-platform-finance-automation/README.md) | OCR and reconciliation automation for invoice and REM-card workflows. | Power Automate, Python, OCR, Excel, SQL, Power BI |
+| [Copilot Support Workflow Hub](projects/copilot-support-workflow-hub/README.md) | Sanitized Copilot Studio and Power Automate support hub with intent routing, case creation, and human handoff. | Copilot Studio, Power Automate, Dataverse, Adaptive Cards, Azure OpenAI, Power BI |
 
 ## PDF One Pagers
 

@@ -1,0 +1,38 @@
+{
+  "name": "03-human-handoff",
+  "displayName": "Human Handoff Packet",
+  "trigger": {
+    "type": "workflowCall",
+    "inputs": ["caseId", "conversationSummary", "intentConfidence", "handoffReason", "requesterEmail"]
+  },
+  "actions": [
+    {
+      "id": "create_handoff_packet",
+      "type": "dataverseCreateRow",
+      "table": "handoff_packets",
+      "fields": {
+        "packet_id": "AUTO",
+        "case_id": "@triggerBody().caseId",
+        "reason": "@triggerBody().handoffReason",
+        "confidence": "@triggerBody().intentConfidence",
+        "summary": "@triggerBody().conversationSummary",
+        "queue": "L2 Support"
+      }
+    },
+    {
+      "id": "notify_queue",
+      "type": "teamsMessage",
+      "message": "A support request needs human review. Open the handoff packet for context and next action."
+    },
+    {
+      "id": "update_case_status",
+      "type": "dataverseUpdateRow",
+      "table": "support_cases",
+      "key": "@triggerBody().caseId",
+      "fields": {
+        "status": "Pending Human Review",
+        "owner_group": "L2 Support"
+      }
+    }
+  ]
+}

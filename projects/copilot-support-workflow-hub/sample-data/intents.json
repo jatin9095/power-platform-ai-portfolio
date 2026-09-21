@@ -1,0 +1,20 @@
+[
+  {
+    "messageText": "I need access to the reporting workspace for monthly review.",
+    "topIntent": "access_request",
+    "confidence": 0.91,
+    "requiredEntities": ["businessApplication", "accessLevel", "businessJustification"]
+  },
+  {
+    "messageText": "Can you tell me whether my ticket was assigned?",
+    "topIntent": "incident_status",
+    "confidence": 0.86,
+    "requiredEntities": ["caseId"]
+  },
+  {
+    "messageText": "The bot is not understanding my issue, connect me to a support agent.",
+    "topIntent": "human_handoff",
+    "confidence": 0.94,
+    "requiredEntities": ["conversationSummary"]
+  }
+]

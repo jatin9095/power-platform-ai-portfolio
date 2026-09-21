@@ -1,0 +1,18 @@
+{
+  "topicName": "Fallback and Handoff",
+  "triggerPhrases": [
+    "I need to speak to someone",
+    "This did not answer my question",
+    "Connect me with support"
+  ],
+  "rules": [
+    "Escalate when confidence is below 0.68",
+    "Escalate when the user asks for a human twice",
+    "Escalate when a request contains blocked or sensitive categories"
+  ],
+  "actions": [
+    "summarize_conversation",
+    "call_human_handoff_workflow",
+    "send_expected_response_time"
+  ]
+}
